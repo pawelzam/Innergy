@@ -1,6 +1,6 @@
 {
     "mainServices": ["Photography", "VideoRecording"],
-    "relatedServices": ["TwoDayEvent", "BlurayPackage"],
+    "extraServices": ["TwoDayEvent", "BlurayPackage"],
     "prices": {
       "2020": {
         "individualServices": {
@@ -79,7 +79,7 @@
           },
           {
             "services": ["Photography", "VideoRecording", "WeddingSession"],
-            "cost": 2500
+            "cost": 2700
           }
         ]
       }

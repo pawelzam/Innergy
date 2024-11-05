@@ -8,13 +8,11 @@ export const updateSelectedServices = (
     action: { type: "Select" | "Deselect"; service: ServiceType }
 ): ServiceType[] => {
     const { type, service } = action;
-
     const hasMainService = serviceData.mainServices.some(mainService => 
         previouslySelectedServices.includes(mainService as ServiceType)
     );
 
     const isMainService = serviceData.mainServices.includes(service);
-
     if (!hasMainService && !isMainService) {
         return previouslySelectedServices;
     }
@@ -31,7 +29,7 @@ export const updateSelectedServices = (
                 newSelectedServices.includes(mainService as ServiceType)
             )
                 ? newSelectedServices
-                : newSelectedServices.filter(s => !serviceData.relatedServices.includes(s));
+                : newSelectedServices.filter(s => !serviceData.extraServices.includes(s));
 
         default:
             return previouslySelectedServices;
@@ -42,18 +40,22 @@ export const calculatePrice = (selectedServices: ServiceType[], selectedYear: Se
     let basePrice = 0;
     let finalPrice = 0;
 
+    const yearPrices = serviceData.prices[selectedYear.toString()];
+    if (!yearPrices) {
+        throw new Error(`Pricing data for the year ${selectedYear} is not available.`);     
+    }
+
     selectedServices.forEach(service => {
-        basePrice += serviceData.prices[selectedYear.toString()].individualServices[service];
+        basePrice += yearPrices.individualServices[service];
     });
 
-    const yearBundles = serviceData.prices[selectedYear.toString()].bundles;
+    const yearBundles = yearPrices.bundles;
     yearBundles.forEach(bundle => {
-        const isBundleSelected = 
-            bundle.services.every(bService => selectedServices.includes(bService as ServiceType)) &&
-            selectedServices.every(sService => bundle.services.includes(sService as ServiceType));
+        const bundleExists = 
+            bundle.services.every(service => selectedServices.includes(service as ServiceType)) &&
+            selectedServices.every(service => bundle.services.includes(service as ServiceType));
 
-
-        if (isBundleSelected) {
+        if (bundleExists) {
             finalPrice = finalPrice === 0 ? bundle.cost : Math.min(finalPrice, bundle.cost);
         }
     });
