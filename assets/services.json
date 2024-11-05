@@ -1,6 +1,6 @@
 {
-    "mainServices": ["Photography", "VideoRecording"],
-    "extraServices": ["TwoDayEvent", "BlurayPackage"],
+    "mainServices": ["Photography", "VideoRecording", "WeddingSession"],
+    "extraServices": [{"service": "TwoDayEvent", "requires": ["Photography", "VideoRecording"]}, {"service": "BlurayPackage", "requires": ["VideoRecording"]}],    
     "prices": {
       "2020": {
         "individualServices": {

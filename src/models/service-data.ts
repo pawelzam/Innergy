@@ -4,8 +4,13 @@ import { YearPrices } from "./year-prices";
 
 export interface ServiceData {
     mainServices: ServiceType[];
-    extraServices: ServiceType[];
+    extraServices: ExtraService[];
     prices: {
         [year in ServiceYear]: YearPrices;
     };
+}
+
+export interface ExtraService{
+    service: ServiceType,
+    requires: ServiceType[]
 }
