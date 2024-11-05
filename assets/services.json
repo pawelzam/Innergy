@@ -1,0 +1,73 @@
+{
+    "services": {
+      "2020": {
+        "individualServices": {
+          "Photography": 1700,
+          "VideoRecording": 1700,
+          "WeddingSession": 600,
+          "BlurayPackage": 300,
+          "TwoDayEvent": 400
+        },
+        "bundles": [
+          {
+            "services": ["Photography", "VideoRecording"],
+            "cost": 2200
+          },
+          {
+            "services": ["Photography", "WeddingSession"],
+            "cost": 2000
+          },
+          {
+            "services": ["VideoRecording", "WeddingSession"],
+            "cost": 2000
+          }
+        ]
+      },
+      "2021": {
+        "individualServices": {
+          "Photography": 1800,
+          "VideoRecording": 1800,
+          "WeddingSession": 600,
+          "BlurayPackage": 300,
+          "TwoDayEvent": 400
+        },
+        "bundles": [
+          {
+            "services": ["Photography", "VideoRecording"],
+            "cost": 2300
+          },
+          {
+            "services": ["Photography", "WeddingSession"],
+            "cost": 2100
+          },
+          {
+            "services": ["VideoRecording", "WeddingSession"],
+            "cost": 2100
+          }
+        ]
+      },
+      "2022": {
+        "individualServices": {
+          "Photography": 1900,
+          "VideoRecording": 1900,
+          "WeddingSession": 600,
+          "BlurayPackage": 300,
+          "TwoDayEvent": 400
+        },
+        "bundles": [
+          {
+            "services": ["Photography", "VideoRecording"],
+            "cost": 2500
+          },
+          {
+            "services": ["Photography", "WeddingSession"],
+            "cost": 2200
+          },
+          {
+            "services": ["VideoRecording", "WeddingSession"],
+            "cost": 2200
+          }
+        ]
+      }
+    }
+  }
