@@ -1,7 +1,10 @@
-export type ServiceYear = 2020 | 2021 | 2022;
-export type ServiceType = "Photography" | "VideoRecording" | "BlurayPackage" | "TwoDayEvent" | "WeddingSession";
+import { ServiceYear } from './models/service-year'
+import { ServiceType } from './models/service-type';
+import { ServiceData } from './models/service-data';
 
-import serviceData from "../assets/services.json";
+import services from "../assets/services.json";
+
+const serviceData = services as ServiceData;
 
 export const updateSelectedServices = (
     previouslySelectedServices: ServiceType[],
