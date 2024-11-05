@@ -1,5 +1,7 @@
 {
-    "services": {
+    "mainServices": ["Photography", "VideoRecording"],
+    "relatedServices": ["TwoDayEvent", "BlurayPackage"],
+    "prices": {
       "2020": {
         "individualServices": {
           "Photography": 1700,
@@ -20,6 +22,10 @@
           {
             "services": ["VideoRecording", "WeddingSession"],
             "cost": 2000
+          },
+          {
+            "services": ["Photography", "VideoRecording", "WeddingSession"],
+            "cost": 2500
           }
         ]
       },
@@ -43,6 +49,10 @@
           {
             "services": ["VideoRecording", "WeddingSession"],
             "cost": 2100
+          },
+          {
+            "services": ["Photography", "VideoRecording", "WeddingSession"],
+            "cost": 2600
           }
         ]
       },
@@ -61,11 +71,15 @@
           },
           {
             "services": ["Photography", "WeddingSession"],
-            "cost": 2200
+            "cost": 1900
           },
           {
             "services": ["VideoRecording", "WeddingSession"],
             "cost": 2200
+          },
+          {
+            "services": ["Photography", "VideoRecording", "WeddingSession"],
+            "cost": 2500
           }
         ]
       }

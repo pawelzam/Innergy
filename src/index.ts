@@ -8,12 +8,34 @@ export const updateSelectedServices = (
     action: { type: "Select" | "Deselect"; service: ServiceType }
 ): ServiceType[] => {
     const { type, service } = action;
-    if (type === "Select" && !previouslySelectedServices.includes(service)) {
-        return [...previouslySelectedServices, service];
-    } else if (type === "Deselect") {
-        return previouslySelectedServices.filter(s => s !== service);
+
+    const hasMainService = serviceData.mainServices.some(mainService => 
+        previouslySelectedServices.includes(mainService as ServiceType)
+    );
+
+    const isMainService = serviceData.mainServices.includes(service);
+
+    if (!hasMainService && !isMainService) {
+        return previouslySelectedServices;
     }
-    return previouslySelectedServices;
+
+    switch (type) {
+        case "Select":
+            return previouslySelectedServices.includes(service)
+                ? previouslySelectedServices
+                : [...previouslySelectedServices, service];
+
+        case "Deselect":
+            const newSelectedServices = previouslySelectedServices.filter(s => s !== service);
+            return serviceData.mainServices.some(mainService => 
+                newSelectedServices.includes(mainService as ServiceType)
+            )
+                ? newSelectedServices
+                : newSelectedServices.filter(s => !serviceData.relatedServices.includes(s));
+
+        default:
+            return previouslySelectedServices;
+    }
 };
 
 export const calculatePrice = (selectedServices: ServiceType[], selectedYear: ServiceYear) => {
@@ -21,14 +43,18 @@ export const calculatePrice = (selectedServices: ServiceType[], selectedYear: Se
     let finalPrice = 0;
 
     selectedServices.forEach(service => {
-        basePrice += serviceData.services[selectedYear.toString()].individualServices[service];
+        basePrice += serviceData.prices[selectedYear.toString()].individualServices[service];
     });
 
-    const yearBundles = serviceData.services[selectedYear.toString()].bundles;
+    const yearBundles = serviceData.prices[selectedYear.toString()].bundles;
     yearBundles.forEach(bundle => {
-        const isBundleSelected = bundle.services.every(bService => selectedServices.includes(bService as ServiceType));
-        if (isBundleSelected && (finalPrice === 0 || bundle.cost < finalPrice)) {
-            finalPrice = bundle.cost;
+        const isBundleSelected = 
+            bundle.services.every(bService => selectedServices.includes(bService as ServiceType)) &&
+            selectedServices.every(sService => bundle.services.includes(sService as ServiceType));
+
+
+        if (isBundleSelected) {
+            finalPrice = finalPrice === 0 ? bundle.cost : Math.min(finalPrice, bundle.cost);
         }
     });
 
